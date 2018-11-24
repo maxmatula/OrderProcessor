@@ -1,0 +1,12 @@
+[{"CurrencyId":1,"Name":"Euro","Symbol":"EUR"},
+{"CurrencyId":2,"Name":"Krona","Symbol":"SEK"},
+{"CurrencyId":3,"Name":"Zloty","Symbol":"PLN"},
+{"CurrencyId":4,"Name":"Rupiah","Symbol":"IDR"},
+{"CurrencyId":5,"Name":"Yuan Renminbi","Symbol":"CNY"},
+{"CurrencyId":6,"Name":"Hryvnia","Symbol":"UAH"},
+{"CurrencyId":7,"Name":"Ruble","Symbol":"RUB"},
+{"CurrencyId":8,"Name":"Rupiah","Symbol":"IDR"},
+{"CurrencyId":9,"Name":"Cedi","Symbol":"GHS"},
+{"CurrencyId":10,"Name":"Bolivar","Symbol":"VEF"},
+{"CurrencyId":11,"Name":"Tenge","Symbol":"KZT"},
+{"CurrencyId":12,"Name":"Dirham","Symbol":"MAD"}]
