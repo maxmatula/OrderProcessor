@@ -4,9 +4,9 @@ Struktura pliku jsona:
 
 {
     "UserId" : "{id}",
-    "Lines":
-    {
-        "ProductId" : "{id}",
-        "Quantity" : "{ammount}"
-    }
+    "Lines":[
+        {"ProductId" : "{id}","Quantity" : "{ammount}"},
+        {"ProductId" : "{id}","Quantity" : "{ammount}"}
+    ]
+    
 }

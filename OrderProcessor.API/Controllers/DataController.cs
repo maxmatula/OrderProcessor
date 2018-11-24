@@ -17,5 +17,14 @@ namespace OrderProcessor.API.Controllers
             //Not implemented yet
             return Ok();
         }
+
+        //POST: Create order in database
+        //api/data/order/create
+        [HttpPost("/order/create")]
+        public async Task<IActionResult> CreateOrder(string orderJson)
+        {
+            //Not implemented yet
+            return Ok(); //Return Created() <<<
+        }
     }
 }
