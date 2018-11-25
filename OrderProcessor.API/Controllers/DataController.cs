@@ -40,7 +40,39 @@ namespace OrderProcessor.API.Controllers
                     }
                     await _context.SaveChangesAsync();
                 }
-                return Ok("done");
+                return Ok("done countries");
+            }
+
+            if (id == 2)
+            {
+                string path = _hosting.ContentRootPath;
+                string json = await System.IO.File.ReadAllTextAsync(path + "/DataJSON/currencies.json");
+                var currencies = JsonConvert.DeserializeObject<IEnumerable<Currency>>(json);
+                if (currencies != null)
+                {
+                    foreach (var currency in currencies)
+                    {
+                        await _context.Currencies.AddAsync(currency);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                return Ok("done currencies");
+            }
+
+            if (id == 3)
+            {
+                string path = _hosting.ContentRootPath;
+                string json = await System.IO.File.ReadAllTextAsync(path + "/DataJSON/products.json");
+                var products = JsonConvert.DeserializeObject<IEnumerable<Product>>(json);
+                if (products != null)
+                {
+                    foreach (var product in products)
+                    {
+                        await _context.Products.AddAsync(product);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                return Ok("done products");
             }
             return Ok("Nothing changed");
         }
