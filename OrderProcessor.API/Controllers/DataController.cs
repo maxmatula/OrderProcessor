@@ -13,44 +13,41 @@ namespace OrderProcessor.API.Controllers
     public class DataController : ControllerBase
     {
         private readonly IHostingEnvironment _hosting;
-        private readonly OrderProcessorContext _context;
+        private OrderProcessorContext _context;
 
         //ROUTE: api/data
-        public DataController(IHostingEnvironment hosting)
+        public DataController(IHostingEnvironment hosting, OrderProcessorContext context)
         {
             _hosting = hosting;
+            _context = context;
         }
-
 
         //POST: Add data to Database
         //api/data/seed/{id}
-        [HttpPost("/seed/{id}")]
-        public async Task<IActionResult> SeedDatabase(int? id)
+        [HttpPost("seed/{id}")]
+        public async Task<IActionResult> SeedDatabase(int id)
         {
-            
-            if (id == null)
-                return NotFound();
-
             if (id == 1)
             {
                 string path = _hosting.ContentRootPath;
-                string json = System.IO.File.ReadAllText(path + "/DataJSON/users.json");
-                var users = JsonConvert.DeserializeObject<IEnumerable<User>>(json);
-                if (users != null)
+                string json = await System.IO.File.ReadAllTextAsync(path + "/DataJSON/countries.json");
+                var countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(json);
+                if (countries != null)
                 {
-                    foreach(var user in users)
+                    foreach (var country in countries)
                     {
-                        _context.Users.Add(user);
+                        await _context.Countries.AddAsync(country);
                     }
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
+                return Ok("done");
             }
-            return Ok();
+            return Ok("Nothing changed");
         }
 
         //POST: Create order in database
         //api/data/order/create
-        [HttpPost("/order/create")]
+        [HttpPost("order/create")]
         public async Task<IActionResult> CreateOrder(string orderJson)
         {
             //Not implemented yet
