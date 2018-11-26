@@ -76,7 +76,7 @@ namespace OrderProcessor.API.Migrations
                     StreetNumber = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
-                    Phone = table.Column<long>(nullable: false),
+                    Phone = table.Column<string>(nullable: true),
                     AdditionalInfo = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     CountryId = table.Column<int>(nullable: false)

@@ -74,6 +74,38 @@ namespace OrderProcessor.API.Controllers
                 }
                 return Ok("done products");
             }
+
+            if (id == 4)
+            {
+                string path = _hosting.ContentRootPath;
+                string json = await System.IO.File.ReadAllTextAsync(path + "/DataJSON/users.json");
+                var users = JsonConvert.DeserializeObject<IEnumerable<User>>(json);
+                if (users != null)
+                {
+                    foreach (var user in users)
+                    {
+                        await _context.Users.AddAsync(user);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                return Ok("done users");
+            }
+
+            if (id == 5)
+            {
+                string path = _hosting.ContentRootPath;
+                string json = await System.IO.File.ReadAllTextAsync(path + "/DataJSON/addresses.json");
+                var addresses = JsonConvert.DeserializeObject<IEnumerable<Address>>(json);
+                if (addresses != null)
+                {
+                    foreach (var address in addresses)
+                    {
+                        await _context.Addresses.AddAsync(address);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                return Ok("done addresses");
+            }
             return Ok("Nothing changed");
         }
 

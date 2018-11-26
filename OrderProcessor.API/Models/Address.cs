@@ -8,7 +8,7 @@ namespace OrderProcessor.API.Models
         public string StreetNumber { get; set; }
         public string PostalCode { get; set; }
         public string City { get; set; }
-        public long Phone { get; set; }
+        public string Phone { get; set; }
         public string AdditionalInfo { get; set; }
 
         public int UserId { get; set; }

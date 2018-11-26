@@ -8,7 +8,7 @@ using OrderProcessor.API.Data;
 namespace OrderProcessor.API.Migrations
 {
     [DbContext(typeof(OrderProcessorContext))]
-    [Migration("20181125083805_initialCreate")]
+    [Migration("20181126171133_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace OrderProcessor.API.Migrations
 
                     b.Property<int>("CountryId");
 
-                    b.Property<long>("Phone");
+                    b.Property<string>("Phone");
 
                     b.Property<string>("PostalCode");
 

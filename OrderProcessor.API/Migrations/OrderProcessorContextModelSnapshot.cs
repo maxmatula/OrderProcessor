@@ -28,7 +28,7 @@ namespace OrderProcessor.API.Migrations
 
                     b.Property<int>("CountryId");
 
-                    b.Property<long>("Phone");
+                    b.Property<string>("Phone");
 
                     b.Property<string>("PostalCode");
 
