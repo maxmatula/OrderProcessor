@@ -8,7 +8,7 @@ using OrderProcessor.API.Data;
 namespace OrderProcessor.API.Migrations
 {
     [DbContext(typeof(OrderProcessorContext))]
-    [Migration("20181126171133_initialCreate")]
+    [Migration("20181126213523_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,38 @@ namespace OrderProcessor.API.Migrations
                     b.ToTable("Currencies");
                 });
 
+            modelBuilder.Entity("OrderProcessor.API.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("OrderProcessor.API.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderProductId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("OrderProductId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderProducts");
+                });
+
             modelBuilder.Entity("OrderProcessor.API.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -87,8 +119,6 @@ namespace OrderProcessor.API.Migrations
                     b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
-
-                    b.Property<int>("Quantity");
 
                     b.HasKey("ProductId");
 
@@ -121,6 +151,19 @@ namespace OrderProcessor.API.Migrations
                     b.HasOne("OrderProcessor.API.Models.User", "User")
                         .WithMany("Address")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OrderProcessor.API.Models.OrderProduct", b =>
+                {
+                    b.HasOne("OrderProcessor.API.Models.Order", "Order")
+                        .WithMany("OrderProducts")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrderProcessor.API.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

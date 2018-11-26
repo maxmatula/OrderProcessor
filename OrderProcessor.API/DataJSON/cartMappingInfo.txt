@@ -3,10 +3,18 @@ Koszyk będzie mapowany z pliku JSON przesyłanego do api.
 Struktura pliku jsona:
 
 {
-    "UserId" : "{id}",
-    "Lines":[
-        {"ProductId" : "{id}","Quantity" : "{ammount}"},
-        {"ProductId" : "{id}","Quantity" : "{ammount}"}
-    ]
-    
+	"UserId": 12,
+	"Lines": [{
+			"ProductId": 2,
+			"Quantity": 7
+		},
+		{
+			"ProductId": 11,
+			"Quantity": 7
+		},
+		{
+			"ProductId": 34,
+			"Quantity": 18
+		}
+	]
 }

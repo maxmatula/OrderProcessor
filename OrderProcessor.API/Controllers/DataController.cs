@@ -112,10 +112,28 @@ namespace OrderProcessor.API.Controllers
         //POST: Create order in database
         //api/data/order/create
         [HttpPost("order/create")]
-        public async Task<IActionResult> CreateOrder(string orderJson)
+        public async Task<IActionResult> CreateOrder([FromBody] Cart cart)
         {
-            //Not implemented yet
-            return Ok(); //Return Created() <<<
+            if (cart != null)
+            {
+                Order order = new Order();
+                order.UserId = cart.UserId;
+                await _context.Orders.AddAsync(order);
+
+                foreach (var line in cart.Lines)
+                {
+                    OrderProduct op = new OrderProduct();
+                    op.OrderId = order.OrderId;
+                    op.ProductId = line.ProductId;
+                    op.Quantity = line.Quantity;
+                    await _context.OrderProducts.AddAsync(op);
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok("order added to database");
+            }
+
+            return Ok("nothing changed!");
         }
     }
 }
