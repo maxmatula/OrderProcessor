@@ -122,7 +122,7 @@ namespace OrderProcessor.API.Controllers
                 order.AddressId = cart.AddressId;
                 order.CurrencyId = cart.CurrencyId;
                 await _context.Orders.AddAsync(order);
-
+                
                 foreach (var line in cart.Lines)
                 {
                     OrderProduct op = new OrderProduct();
@@ -132,6 +132,8 @@ namespace OrderProcessor.API.Controllers
                     await _context.OrderProducts.AddAsync(op);
                 }
 
+                await _context.SaveChangesAsync();
+                _context.Update(order);
                 await _context.SaveChangesAsync();
                 return Ok($"order with id: {order.OrderId} has been added to database");
             }

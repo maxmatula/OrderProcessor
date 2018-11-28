@@ -42,11 +42,11 @@ namespace OrderProcessor.API.Migrations
                     UserId = table.Column<int>(nullable: false),
                     AddressId = table.Column<int>(nullable: false),
                     CurrencyId = table.Column<int>(nullable: false),
-                    ProductsTotalNumber = table.Column<int>(nullable: false),
-                    TaxPercent = table.Column<decimal>(nullable: false),
-                    Tax = table.Column<decimal>(nullable: false),
-                    PriceWithoutTax = table.Column<decimal>(nullable: false),
-                    TotalPrice = table.Column<decimal>(nullable: false)
+                    ProductsTotalNumber = table.Column<int>(nullable: true),
+                    TaxPercent = table.Column<decimal>(nullable: true),
+                    Tax = table.Column<decimal>(nullable: true),
+                    PriceWithoutTax = table.Column<decimal>(nullable: true),
+                    TotalPrice = table.Column<decimal>(nullable: true)
                 },
                 constraints: table =>
                 {
