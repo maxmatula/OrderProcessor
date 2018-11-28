@@ -4,6 +4,8 @@ Struktura pliku jsona:
 
 {
 	"UserId": 12,
+	"AddressId": 12,
+	"CurrencyId": 3,
 	"Lines": [{
 			"ProductId": 2,
 			"Quantity": 7

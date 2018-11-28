@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using OrderProcessor.API.Data;
 using OrderProcessor.API.Models;
@@ -112,7 +113,7 @@ namespace OrderProcessor.API.Controllers
         //POST: Create order in database
         //api/data/order/create
         [HttpPost("order/create")]
-        public async Task<IActionResult> CreateOrder([FromBody] Cart cart)
+        public async Task<IActionResult> CreateOrder([FromBody]Cart cart)
         {
             if (cart != null)
             {
@@ -130,10 +131,24 @@ namespace OrderProcessor.API.Controllers
                 }
 
                 await _context.SaveChangesAsync();
-                return Ok("order added to database");
+                return Ok($"order with id: {order.OrderId} has been added to database");
             }
 
             return Ok("nothing changed!");
+        }
+
+        //GET: Get existing order from database
+        [HttpGet("order/{id}")]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
+
+            if (order != null)
+            {
+                return Ok(order);
+            }
+
+            return BadRequest();
         }
     }
 }
