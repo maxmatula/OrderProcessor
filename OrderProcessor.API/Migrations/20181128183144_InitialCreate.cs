@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderProcessor.API.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,9 +11,8 @@ namespace OrderProcessor.API.Migrations
                 name: "Countries",
                 columns: table => new
                 {
-                    CountryId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
+                    CountryId = table.Column<int>(nullable: false),
+                                            Name = table.Column<string>(nullable: true),
                     TaxRate = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -24,8 +24,7 @@ namespace OrderProcessor.API.Migrations
                 name: "Currencies",
                 columns: table => new
                 {
-                    CurrencyId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    CurrencyId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Symbol = table.Column<string>(nullable: true)
                 },
@@ -39,8 +38,15 @@ namespace OrderProcessor.API.Migrations
                 columns: table => new
                 {
                     OrderId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false),
+                    AddressId = table.Column<int>(nullable: false),
+                    CurrencyId = table.Column<int>(nullable: false),
+                    ProductsTotalNumber = table.Column<int>(nullable: false),
+                    TaxPercent = table.Column<decimal>(nullable: false),
+                    Tax = table.Column<decimal>(nullable: false),
+                    PriceWithoutTax = table.Column<decimal>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,8 +57,7 @@ namespace OrderProcessor.API.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false)
@@ -66,8 +71,7 @@ namespace OrderProcessor.API.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true)
@@ -82,7 +86,7 @@ namespace OrderProcessor.API.Migrations
                 columns: table => new
                 {
                     OrderProductId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Quantity = table.Column<int>(nullable: false),
                     OrderId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false)
@@ -108,8 +112,7 @@ namespace OrderProcessor.API.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    AddressId = table.Column<int>(nullable: false),
                     CompanyName = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     StreetNumber = table.Column<string>(nullable: true),
