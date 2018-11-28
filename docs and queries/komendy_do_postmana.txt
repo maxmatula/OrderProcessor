@@ -1,0 +1,40 @@
+// Dodawanie ordera POST
+
+http://localhost:5000/api/data/order/create
+
+//Body jako json
+
+{
+	"UserId": 12,
+	"AddressId": 12,
+	"CurrencyId": 3,
+	"Lines": [{
+			"ProductId": 2,
+			"Quantity": 7
+		},
+		{
+			"ProductId": 11,
+			"Quantity": 7
+		},
+		{
+			"ProductId": 34,
+			"Quantity": 18
+		}
+	]
+}
+
+//Seedowanie bazy danych POST
+//Po kolei wklepywać
+
+http://localhost:5000/api/data/seed/1
+http://localhost:5000/api/data/seed/2
+http://localhost:5000/api/data/seed/3
+http://localhost:5000/api/data/seed/4
+http://localhost:5000/api/data/seed/5
+
+
+//pobieranie danych konkretnego ordera jako json GET
+
+http://localhost:5000/api/data/order/{id}
+
+{id} podmienić z id ordera np 1

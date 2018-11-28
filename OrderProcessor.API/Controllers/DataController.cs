@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -145,7 +146,7 @@ namespace OrderProcessor.API.Controllers
         [HttpGet("order/{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
+            var order = await _context.Orders.Include(g => g.OrderProducts).Where(x => x.OrderId == id).ToListAsync();
 
             if (order != null)
             {
