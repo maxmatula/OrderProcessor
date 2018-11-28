@@ -119,6 +119,8 @@ namespace OrderProcessor.API.Controllers
             {
                 Order order = new Order();
                 order.UserId = cart.UserId;
+                order.AddressId = cart.AddressId;
+                order.CurrencyId = cart.CurrencyId;
                 await _context.Orders.AddAsync(order);
 
                 foreach (var line in cart.Lines)
